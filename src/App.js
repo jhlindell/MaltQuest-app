@@ -6,6 +6,7 @@ import Navbar from './components/Nav/Navbar';
 
 import HomePage from './components/HomePage';
 import IngredientList from './components/Ingredients/IngredientListContainer';
+import RecipeList from './components/Recipes/RecipeListContainer';
 
 const styles = {
   flexColumn: {
@@ -39,6 +40,7 @@ class App extends Component {
           <div style={ styles.flex1 } id="mainBlock">
             <Switch>
               <Route exact path='/ingredients' component={IngredientList} />
+              <Route exact path='/recipes' component={RecipeList} />
               <Route exact path='/' component={HomePage} />
             </Switch>
           </div>

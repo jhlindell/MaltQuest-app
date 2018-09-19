@@ -33,13 +33,15 @@ const IngredientListDisplay = (props) => {
             <th>Type</th>
           </tr>
         </thead>
-        { props.ingredientList.map((ingredient) => {
-            return <tr key={ingredient.name + ingredient.type}>
-            <td>{ingredient.name}</td>
-            <td>{ingredient.type}</td>
-            </tr>
-          }) 
-        }
+        <tbody>
+          { props.ingredientList.map((ingredient) => {
+              return <tr key={ingredient.name + ingredient.type}>
+              <td>{ingredient.name}</td>
+              <td>{ingredient.type}</td>
+              </tr>
+            }) 
+          }
+        </tbody>
       </Table>
       <CardFooter>
         Page List

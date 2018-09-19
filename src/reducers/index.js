@@ -11,8 +11,20 @@ function ingredientList(state=[], action){
   }
 }
 
+function recipeList(state=[], action){
+  switch(action.type){
+    case 'SET_RECIPE_LIST':
+      return action.payload;   
+    case 'CLEAR_RECIPE_LIST':
+      return []    
+    default:
+      return state;
+  }
+}
+
 const appReducer = combineReducers({
-  ingredientList
+  ingredientList,
+  recipeList
 });
 
 export default appReducer;
