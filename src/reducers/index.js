@@ -1,7 +1,18 @@
 import { combineReducers } from 'redux';
 
-const appReducer = combineReducers({
+function ingredientList(state=[], action){
+  switch(action.type){
+    case 'SET_INGREDIENT_LIST':
+      return action.payload;   
+    case 'CLEAR_INGREDIENT_LIST':
+      return []    
+    default:
+      return state;
+  }
+}
 
+const appReducer = combineReducers({
+  ingredientList
 });
 
 export default appReducer;
