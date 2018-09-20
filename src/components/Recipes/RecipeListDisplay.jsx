@@ -23,7 +23,7 @@ const RecipeListDisplay = (props) => {
     <Card style={styles.list}>
       <CardHeader>
         <div style={styles.header}>
-          <strong>Ingredient List</strong>
+          <strong>Recipe List</strong>
         </div>
       </CardHeader>
       <Table striped>

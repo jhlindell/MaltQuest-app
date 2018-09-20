@@ -20,8 +20,8 @@ const recipes = [
     batchSize: '5.5 gallons',
     description: 'This beautifully colored amber ale will drink like a champ and have you coming back for more',
     ingredients: [
-      { name: 'amber malt extract', type: 'extract'},
-      { name: 'cascade hops', type: 'hops'},
+      { name: 'amber malt extract', type: 'extract', amount: '8.0 lbs'},
+      { name: 'cascade hops', type: 'hops', amount: '1.0 oz'},
       { name: 'ale yeast', type: 'yeast'},
     ],
     instructions: [
@@ -42,7 +42,7 @@ const recipes = [
       { name: 'light malt', type: 'grain', amount: '8.0 lbs'},
       { name: 'chocolate malt', type: 'grain', amount: '1.0 lbs'},
       { name: 'roasted barley', type: 'grain', amount: '0.5 lbs'},
-      { name: 'fuggle hops', type: 'hops'},
+      { name: 'fuggle hops', type: 'hops', amount: '1.0 oz'},
       { name: 'ale yeast', type: 'yeast'},
     ],
     instructions: [
@@ -75,4 +75,8 @@ export function getRecipeList(){
 
 export function clearRecipeList(){
   return { type: 'CLEAR_RECIPE_LIST' };
+}
+
+export function createRecipe(){
+  console.log('this is where api call for creating recipe would go');
 }
