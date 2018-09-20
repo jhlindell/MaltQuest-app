@@ -23,6 +23,12 @@ const styles= {
     color: 'red'
   },
 
+  infoError: {
+    fontSize: '1.0rem',
+    color: 'red',
+    marginTop: '10px',
+  },
+
   titleText: {
     fontSize: '1.2rem',
     backgroundColor: '#432a0d',
@@ -71,6 +77,8 @@ const RecipeFormDisplay = (props) => {
                   onChange={(e) => { props.handleInputChange(e)} }
                   placeholder="Recipe Name"
                   value={ props.state.name }/> 
+                { props.state.errors.name && 
+                  <div style={ styles.infoError }>{ props.state.errors.name }</div> }
               </Col>
             </FormGroup>
             <FormGroup row>
@@ -81,7 +89,9 @@ const RecipeFormDisplay = (props) => {
                   rows="2"
                   onChange={(e) => { props.handleInputChange(e)} }
                   placeholder="Description"
-                  value={ props.state.description}/>  
+                  value={ props.state.description}/>
+                { props.state.errors.description && 
+                  <div style={ styles.infoError }>{ props.state.errors.description }</div> }  
               </Col>    
             </FormGroup>
             <FormGroup row>
@@ -91,7 +101,9 @@ const RecipeFormDisplay = (props) => {
                   type="text"
                   onChange={(e) => { props.handleInputChange(e)} }
                   placeholder="Style"
-                  value={ props.state.style }/> 
+                  value={ props.state.style }/>
+                { props.state.errors.style && 
+                  <div style={ styles.infoError }>{ props.state.errors.style }</div> } 
               </Col>
               <Label for="recipeSize" sm={2} style={ styles.bodyText }>Batch Size</Label>
               <Col sm={4}>
@@ -100,6 +112,8 @@ const RecipeFormDisplay = (props) => {
                   onChange={(e) => { props.handleInputChange(e)} }
                   placeholder="Batch Size"
                   value={ props.state.batchSize }/> 
+                { props.state.errors.batchSize && 
+                  <div style={ styles.infoError }>{ props.state.errors.batchSize }</div> }
               </Col>
             </FormGroup>
           </Card>
@@ -168,6 +182,8 @@ const RecipeFormDisplay = (props) => {
               <div style={styles.errorText}>{ props.state.errors.newIngredientType }</div>} 
             { props.state.errors.newIngredientAmount && 
               <div style={styles.errorText}>{ props.state.errors.newIngredientAmount }</div>}
+            { props.state.errors.ingredients && 
+              <div className="mb-2" style={styles.errorText}>{ props.state.errors.ingredients }</div>}
           </Card>
           <Card style={ styles.infoGroup }>
             <strong>Instructions:</strong>
@@ -212,7 +228,7 @@ const RecipeFormDisplay = (props) => {
               </Button>
             </FormGroup>
             { props.state.errors.instruction && 
-              <div style={styles.errorText}>{ props.state.errors.instruction }</div>}
+              <div className="mb-2" style={styles.errorText}>{ props.state.errors.instruction }</div>}
           </Card>
         </CardBody>
         <CardFooter style={ styles.footer }>

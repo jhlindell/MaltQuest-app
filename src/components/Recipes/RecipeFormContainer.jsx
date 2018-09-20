@@ -20,6 +20,9 @@ class RecipeFormContainer extends Component {
         newIngredientAmount: '',
         newIngredientType: '',
         instruction: '',
+        name: '',
+        description: '',
+        ingredients: '',
       }
     };
   }
@@ -33,16 +36,55 @@ class RecipeFormContainer extends Component {
 
   handleFormSubmit = (event) => {
     event.preventDefault();
-    const { name, style, batchSize, description, ingredients, instructions } = this.state;
-    this.props.handleFormSubmit({ name, style, batchSize, description, ingredients, instructions });
+    const formValid = this.validateForm();
+    if(formValid){
+      const { name, style, batchSize, description, ingredients, instructions } = this.state;
+      this.props.handleFormSubmit({ name, style, batchSize, description, ingredients, instructions });
+    }
   }
 
   clearErrors = () => {
-    this.setState( { ingredientErrors: {
+    this.setState( { errors: {
       newIngredientName: '',
       newIngredientAmount: '',
       newIngredientType: '',
+      instruction: '',
+      name: '',
+      description: '',
+      ingredients: '',
     }});
+  }
+
+  validateForm = () => {
+    this.clearErrors();
+    let isValid = true;
+    let errors = {};
+    if(this.state.name === ''){
+      errors.name = 'Please enter a name for this drink.';
+      isValid = false;
+    }
+    if(this.state.description === ''){
+      errors.description = 'Please provide a description for this drink';
+      isValid = false;
+    }
+    if(this.state.style === ''){
+      errors.style = 'Be a sport and add a style.';
+      isValid = false;
+    }
+    if(this.state.batchSize === ''){
+      errors.batchSize = "What's the batch size?";
+      isValid = false;
+    }
+    if(this.state.ingredients.length === 0){
+      errors.ingredients = "Can't have beer without ingredients...";
+      isValid = false;
+    }
+    if(this.state.instructions.length === 0){
+      errors.instruction = 'You really want to leave this to fate?';
+      isValid = false;
+    }
+    this.setState({errors});
+    return isValid;
   }
 
   //ingredient methods
