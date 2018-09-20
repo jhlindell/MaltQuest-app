@@ -1,3 +1,4 @@
+import '../../App.css';
 import React from 'react';
 import { 
   Button,
@@ -5,7 +6,6 @@ import {
   InputGroup, InputGroupAddon, Input,  
   Table } from 'reactstrap';
 import Pagination from "react-js-pagination";
-
 
 const styles = {
   list: {
@@ -17,30 +17,45 @@ const styles = {
   },
   
   header: {
+    backgroundColor: '#432a0d',
+    color: 'white'
+  },
+
+  headerRow: {
     display: 'flex', 
     margin: 'auto', 
     justifyContent: 'space-around',
     alignItems: 'center'
   },
+
+  titleText: {
+    fontSize: '1.2rem',
+  },
+
+  button: {
+    backgroundColor: '#dd8b15',
+    borderColor: '#dd8b15',
+  }
 }
 
 const IngredientListDisplay = (props) => {
   return (
     <Card style={styles.list}>
-      <CardHeader>
-        <div style={styles.header}>
+      <CardHeader style={styles.header}>
+        <div style={styles.headerRow}>
           <strong>Ingredient List</strong>
         </div>
-        <div style={styles.header}>
+        <div style={styles.headerRow}>
           <div style={{paddingTop: '15px'}}>
-            <Pagination              
+            <Pagination         
               activePage={ props.state.activePage }
               itemsCountPerPage={ props.state.itemsPerPage }
               totalItemsCount={ props.ingredientList.total }
               pageRangeDisplayed={ 5 }
               onChange={ props.handlePageChange }
               itemClass='page-item'
-              linkClass='page-link'
+              linkClass='page-link link-custom'
+              activeLinkClass='active-link'
             />
           </div>
           <InputGroup className="ml-2">
@@ -52,7 +67,7 @@ const IngredientListDisplay = (props) => {
             />
             <InputGroupAddon addonType="append">
               <Button 
-                color="primary"
+                style={ styles.button }
                 type="button"
                 onClick={ props.handleSearchSubmit }
               >Search</Button>
@@ -78,8 +93,8 @@ const IngredientListDisplay = (props) => {
             }
           </tbody>
         </Table> : <span>Loading...</span>}
-      <CardFooter>
-        <div style={styles.header}> 
+      <CardFooter style={ styles.header }>
+        <div style={styles.headerRow}> 
             <Pagination              
               activePage={ props.state.activePage }
               itemsCountPerPage={ props.state.itemsPerPage }
@@ -87,7 +102,8 @@ const IngredientListDisplay = (props) => {
               pageRangeDisplayed={ 5 }
               onChange={ props.handlePageChange }
               itemClass='page-item'
-              linkClass='page-link'
+              linkClass='page-link link-custom'
+              activeLinkClass='active-link'
             />
         </div>
       </CardFooter>

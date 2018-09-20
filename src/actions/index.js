@@ -1,19 +1,6 @@
 import axios from 'axios';
 const URL = 'http://localhost:8000';
 
-const ingredients = [
-  { name: 'light malt extract', type: 'extract'},
-  { name: 'dark malt extract', type: 'extract'},
-  { name: 'amber malt extract', type: 'extract'},
-  { name: 'light malt', type: 'grain'},
-  { name: 'chocolate malt', type: 'grain'},
-  { name: 'roasted barley', type: 'grain'},
-  { name: 'cascade hops', type: 'hops'},
-  { name: 'fuggle hops', type: 'hops'},
-  { name: 'ale yeast', type: 'yeast'},
-  { name: 'lager yeast', type: 'yeast'},
-];
-
 const recipes = [
   { 
     name: 'Amazing Amber',

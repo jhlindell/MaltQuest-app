@@ -4,3 +4,14 @@
   padding-left: 0px !important;
   padding-right: 0px !important;
 }
+
+.link-custom {
+  color: #dd8b15;
+}
+
+.active-link {
+  background-color: #dd8b15 !important;
+  border-color:  #dd8b15 !important;
+  z-index: 2;
+  color: white;
+}
