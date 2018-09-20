@@ -1,4 +1,5 @@
-// import axios from 'axios';
+import axios from 'axios';
+const URL = 'http://localhost:8000';
 
 const ingredients = [
   { name: 'light malt extract', type: 'extract'},
@@ -57,9 +58,19 @@ const recipes = [
   }
 ];
 
-export function getIngredientList(){
+export function getIngredientList(page, limit, search){
+  let queryString = `?page=${page}&limit=${limit}`;
+  if(search){
+    queryString += `&search=${search}`;
+  }
   return (dispatch) => {
-    dispatch({ type: 'SET_INGREDIENT_LIST', payload: ingredients });
+    axios.get(`${URL}/api/ingredients${queryString}`)
+      .then((response) => {
+        dispatch({ type: 'SET_INGREDIENT_LIST', payload: response.data });
+      })
+      .catch((err)=> {
+        console.log(err);
+      })
   }
 }
 
