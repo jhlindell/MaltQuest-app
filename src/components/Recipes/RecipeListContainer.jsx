@@ -10,6 +10,7 @@ class RecipeListContainer extends Component {
     this.state = {
       activePage: 1,
       itemsPerPage: 20,
+      searchBox: '',
     };
   }
 
@@ -23,8 +24,19 @@ class RecipeListContainer extends Component {
 
   handlePageChange = (pageNumber) => {
     this.setState({ activePage: pageNumber }, () => {
-      this.props.getRecipeList(this.state.activePage, this.state.itemsPerPage);
+      this.props.getRecipeList(this.state.activePage, this.state.itemsPerPage, this.state.searchBox);
     });
+  }
+
+  handleInputChange = (event) => {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+    this.setState({[name]: value});
+  }
+
+  handleSearchSubmit = (event) => {
+    this.props.getRecipeList(this.state.activePage, this.state.itemsPerPage, this.state.searchBox)
   }
 
   render(){
@@ -34,6 +46,8 @@ class RecipeListContainer extends Component {
         state={ this.state }
         handlePageChange = { this.handlePageChange }
         { ...this.props }
+        handleInputChange= { this.handleInputChange }
+        handleSearchSubmit= { this.handleSearchSubmit }
       />
     );
   }

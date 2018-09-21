@@ -65,8 +65,11 @@ export function clearIngredientList(){
   return { type: 'CLEAR_INGREDIENT_LIST' };
 }
 
-export function getRecipeList(page, limit){
+export function getRecipeList(page, limit, search){
   let queryString = `?page=${page}&limit=${limit}`;
+  if(search){
+    queryString += `&search=${search}`;
+  }
   return (dispatch) => {
     axios.get(`${URL}/api/recipes${queryString}`)
       .then((response) => {

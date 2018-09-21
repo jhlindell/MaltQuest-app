@@ -1,7 +1,9 @@
 import '../../App.css';
 import React from 'react';
 import { 
+  Button,
   Card, CardFooter, CardHeader,
+  InputGroup, InputGroupAddon, Input,  
   Table } from 'reactstrap';
 import Pagination from "react-js-pagination";
 
@@ -26,6 +28,11 @@ const styles = {
     justifyContent: 'space-around',
     alignItems: 'center'
   },
+
+  button: {
+    backgroundColor: '#dd8b15',
+    borderColor: '#dd8b15',
+  },
 }
 
 const RecipeListDisplay = (props) => {
@@ -48,6 +55,21 @@ const RecipeListDisplay = (props) => {
               activeLinkClass='active-link'
             />
           </div>
+          <InputGroup className="ml-2">
+            <Input 
+              name="searchBox" 
+              id="searchBox" 
+              onChange={ props.handleInputChange }
+              value={ props.state.searchBox }
+            />
+            <InputGroupAddon addonType="append">
+              <Button 
+                style={ styles.button }
+                type="button"
+                onClick={ props.handleSearchSubmit }
+              >Search</Button>
+            </InputGroupAddon>
+          </InputGroup>
         </div>
       </CardHeader>
       { props.recipeList.docs ? 
