@@ -10,6 +10,7 @@ class IngredientList extends Component {
     this.state = {
       activePage: 1,
       itemsPerPage: 20,
+      searchBox: '',
     };
   }
 
@@ -35,7 +36,6 @@ class IngredientList extends Component {
   }
 
   handleSearchSubmit = (event) => {
-    console.log("submitting search")
     this.props.getIngredientList(this.state.activePage, this.state.itemsPerPage, this.state.searchBox)
   }
 

@@ -50,8 +50,8 @@ const styles= {
   },
 
   button: {
-    backgroundColor: 'rgb(153, 187, 40)',
-    borderColor: 'rgb(153, 187, 40)',
+    backgroundColor: '#dd8b15',
+    borderColor: '#dd8b15',
   },
 
   footer: {

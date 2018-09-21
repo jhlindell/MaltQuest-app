@@ -57,7 +57,7 @@ export function getIngredientList(page, limit, search){
       })
       .catch((err)=> {
         console.log(err);
-      })
+      });
   }
 }
 
@@ -65,9 +65,16 @@ export function clearIngredientList(){
   return { type: 'CLEAR_INGREDIENT_LIST' };
 }
 
-export function getRecipeList(){
+export function getRecipeList(page, limit){
+  let queryString = `?page=${page}&limit=${limit}`;
   return (dispatch) => {
-    dispatch({ type: 'SET_RECIPE_LIST', payload: recipes });
+    axios.get(`${URL}/api/recipes${queryString}`)
+      .then((response) => {
+        dispatch({ type: 'SET_RECIPE_LIST', payload: response.data });
+      })
+      .catch((err)=> {
+        console.log(err);
+      });
   }
 }
 
