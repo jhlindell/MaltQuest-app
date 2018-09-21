@@ -5,6 +5,7 @@ import {
   Card, CardFooter, CardHeader,
   InputGroup, InputGroupAddon, Input,  
   Table } from 'reactstrap';
+import { Link } from 'react-router-dom';
 import Pagination from "react-js-pagination";
 
 
@@ -70,6 +71,12 @@ const RecipeListDisplay = (props) => {
               >Search</Button>
             </InputGroupAddon>
           </InputGroup>
+          <Button 
+            className="ml-2"
+            style={ styles.button }
+            onClick={()=> props.history.push('/recipes/create')}>
+            Add Recipe
+          </Button>
         </div>
       </CardHeader>
       { props.recipeList.docs ? 
@@ -82,8 +89,9 @@ const RecipeListDisplay = (props) => {
           </thead>
           <tbody>
             { props.recipeList.docs.map((recipe) => {
-                return <tr key={recipe.name + recipe.type}>
-                <td>{recipe.name}</td>
+                const linkUrl = `/recipes/${ recipe._id }`;
+                return <tr key={recipe._id}>
+                <td><Link to={linkUrl}>{recipe.name}</Link></td>
                 <td>{recipe.style}</td>
                 </tr>
               }) 
@@ -92,16 +100,23 @@ const RecipeListDisplay = (props) => {
         </Table> : <span>Loading...</span>}
       <CardFooter style={ styles.header }>
         <div style={styles.headerRow}> 
-          <Pagination              
-            activePage={ props.state.activePage }
-            itemsCountPerPage={ props.state.itemsPerPage }
-            totalItemsCount={ props.recipeList.total }
-            pageRangeDisplayed={ 5 }
-            onChange={ props.handlePageChange }
-            itemClass='page-item'
-            linkClass='page-link link-custom'
-            activeLinkClass='active-link'
-          />
+          <Button 
+            style={ styles.button }
+            onClick={()=> props.history.push('/recipes/create')}>
+            Add Recipe
+          </Button>
+          <div style={{paddingTop: '15px'}}>
+            <Pagination              
+              activePage={ props.state.activePage }
+              itemsCountPerPage={ props.state.itemsPerPage }
+              totalItemsCount={ props.recipeList.total }
+              pageRangeDisplayed={ 5 }
+              onChange={ props.handlePageChange }
+              itemClass='page-item'
+              linkClass='page-link link-custom'
+              activeLinkClass='active-link'
+            />
+          </div>
         </div>
       </CardFooter>
     </Card>

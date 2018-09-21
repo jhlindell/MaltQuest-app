@@ -88,3 +88,33 @@ export function clearRecipeList(){
 export function createRecipe(){
   console.log('this is where api call for creating recipe would go');
 }
+
+export function getRecipeById(id, failure){
+  return (dispatch) => {
+    axios.get(`${URL}/api/recipes/${id}`)
+      .then((response) => {
+        dispatch({ type: 'SINGLE_RECIPE', payload: response.data });
+      })
+      .catch((err)=> {
+        console.log(err);
+        failure();
+      });
+  }
+}
+
+export function clearSingleRecipe(){
+  return { type: 'CLEAR_SINGLE_RECIPE' };
+}
+
+export function deleteRecipe(id, success){
+  return (dispatch) => {
+    axios.delete(`${URL}/api/recipes/${id}`)
+      .then((response) => {
+        console.log(`success in deleting item ${id}`);
+        success();
+      })
+      .catch((err)=> {
+        console.log(err);
+      });
+  }
+}
