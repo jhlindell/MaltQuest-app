@@ -1,5 +1,9 @@
+import axios from 'axios';
 import React, { Component } from 'react';
 import RecipeFormDisplay from './RecipeFormDisplay';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { createIngredient } from '../../actions';
 
 class RecipeFormContainer extends Component {
   constructor(props){
@@ -23,7 +27,11 @@ class RecipeFormContainer extends Component {
         name: '',
         description: '',
         ingredients: '',
-      }
+      },
+      isLoading: false,
+      options: [],
+      selected: null,
+      modal: false,
     };
   }
 
@@ -105,19 +113,27 @@ class RecipeFormContainer extends Component {
   addIngredient = () => {
     const ingredientValid = this.validateIngredient();
     if(ingredientValid){
-      const ingArray = this.state.ingredients;
-        const newIngredient = { 
-        type: this.state.newIngredientType, 
-        amount: this.state.newIngredientAmount, 
-        name: this.state.newIngredientName,
-      };
-      ingArray.push(newIngredient);
-      this.setState({ 
-        ingredients: ingArray, 
-        newIngredientAmount: '', 
-        newIngredientName: '',
-        newIngredientType: ''
-      }); 
+      if(!this.state.selected){
+        this.addIngToDB();
+      } else {
+        const ingArray = this.state.ingredients;
+          const newIngredient = { 
+          type: this.state.newIngredientType, 
+          amount: this.state.newIngredientAmount, 
+          name: this.state.newIngredientName,
+        };
+        if(this.state.selected && this.state.selected[0]._id){
+          newIngredient._id = this.state.selected[0]._id;
+        }
+        ingArray.push(newIngredient);
+        this.setState({ 
+          ingredients: ingArray, 
+          newIngredientAmount: '', 
+          newIngredientName: '',
+          newIngredientType: ''
+        }); 
+        this.child.clearTypeahead();
+      }
     }
   }
 
@@ -132,8 +148,8 @@ class RecipeFormContainer extends Component {
     let errors = {};
     let isValid = true;
     
-    if(Number(this.state.newIngredientAmount) <= 0) {
-      errors.newIngredientAmount = 'Please enter a positive ingredient amount';
+    if(this.state.newIngredientAmount === '') {
+      errors.newIngredientAmount = 'Please enter an amount';
       isValid = false;
     }
 
@@ -148,6 +164,29 @@ class RecipeFormContainer extends Component {
     }
     this.setState({ errors });
     return isValid;
+  }
+
+  handleATAchange = (item) => {
+    if(item.length){
+      this.setState({ newIngredientName: item[0].name, selected: item });
+    } else {
+      this.setState({ newIngredientName: '', selected: null });
+    }
+  }
+
+  handleATAInputChange = (input) => {
+    this.setState({ newIngredientName: input });
+  }
+
+  onItemSearch = (query) => {
+    this.setState({isLoading: true});
+    axios.get(`http://localhost:8000/api/ingredients?search${query}`)
+      .then((response) => {
+        this.setState({ options: response.data.docs, isLoading: false });
+      })
+      .catch((error) => {
+        console.log('error getting stock items');
+      });
   }
 
   // instruction methods
@@ -178,9 +217,23 @@ class RecipeFormContainer extends Component {
     return isValid;
   }
 
+  addIngToDB = () => {
+    this.modalToggle();
+  };
+
+  modalToggle = () => {
+    this.setState({ modal: !this.state.modal });
+  }
+
+  handleIngModalReturn = (ingredient) => {
+    this.modalToggle();
+    this.props.createIngredient(ingredient, ()=> {});
+  }
+
   render(){
     return (
       <RecipeFormDisplay 
+        ref={ instance => { this.child = instance; }}
         state={ this.state }
         handleFormSubmit={ this.handleFormSubmit }
         handleInputChange={ this.handleInputChange }
@@ -189,9 +242,22 @@ class RecipeFormContainer extends Component {
         removeIngredient={ this.removeIngredient }
         addInstruction={ this.addInstruction }
         removeInstruction={ this.removeInstruction }
+        onItemSearch={ this.onItemSearch }
+        handleATAchange={ this.handleATAchange }
+        handleATAInputChange={ this.handleATAInputChange }
+        handleIngModalReturn={ this.handleIngModalReturn }
+        modalToggle={ this.modalToggle }
       />
     );
   }
 }
 
-export default RecipeFormContainer;
+function mapStateToProps(state){
+  return { newIngredient: state.newIngredient}
+}
+
+function mapDispatchToProps(dispatch){
+  return bindActionCreators({ createIngredient }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RecipeFormContainer);
