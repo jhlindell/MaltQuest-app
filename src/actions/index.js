@@ -136,6 +136,23 @@ export function editRecipe(id, recipe, success){
       })
       .catch((err) => {
         console.log(err);
-      })
+      });
   }
+}
+
+export function createIngredient(ingredient, success){
+  return (dispatch) => {
+    axios.post(`${URL}/api/ingredients`, ingredient)
+      .then((response) => {
+        dispatch({ type: 'NEW_INGREDIENT', payload: response.data });
+        success();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+}
+
+export function clearNewIngredient(){
+  return { type: 'CLEAR_NEW_INGREDIENT' };
 }

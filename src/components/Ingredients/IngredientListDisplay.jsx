@@ -73,6 +73,14 @@ const IngredientListDisplay = (props) => {
               >Search</Button>
             </InputGroupAddon>
           </InputGroup>
+          <Button
+            className="ml-2"
+            style={ styles.button}
+            type="button"
+            onClick={ ()=> props.history.push('/ingredients/create')}
+          >
+            New Ingredient
+          </Button>
         </div>
       </CardHeader>
       {props.ingredientList.docs ? 
