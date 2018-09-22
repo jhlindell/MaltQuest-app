@@ -41,7 +41,7 @@ const RecipeListDisplay = (props) => {
     <Card style={styles.list}>
       <CardHeader style={styles.header}>
         <div style={styles.headerRow}>
-          <strong>Recipe List</strong>
+          <h4>Recipe List</h4>
         </div>
         <div style={styles.headerRow}>
           <div style={{paddingTop: '15px'}}>

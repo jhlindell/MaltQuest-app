@@ -43,7 +43,7 @@ const IngredientListDisplay = (props) => {
     <Card style={styles.list}>
       <CardHeader style={styles.header}>
         <div style={styles.headerRow}>
-          <strong>Ingredient List</strong>
+          <h4>Ingredient List</h4>
         </div>
         <div style={styles.headerRow}>
           <div style={{paddingTop: '15px'}}>
