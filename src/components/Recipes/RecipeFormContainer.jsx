@@ -27,6 +27,19 @@ class RecipeFormContainer extends Component {
     };
   }
 
+  componentDidMount(){
+    if(this.props.recipe){
+      this.setState({
+        name: this.props.recipe.name,
+        description: this.props.recipe.description,
+        style: this.props.recipe.style,
+        batchSize: this.props.recipe.batchSize,
+        ingredients: this.props.recipe.ingredients,
+        instructions: this.props.recipe.instructions
+      })
+    }
+  }
+
   handleInputChange = (event) => {
     const target = event.target;
     const value = target.value;
@@ -133,7 +146,7 @@ class RecipeFormContainer extends Component {
       errors.newIngredientType = 'Please enter an ingredient type';
       isValid = false;
     }
-    this.setState({ errors }, ()=> console.log(this.state));
+    this.setState({ errors });
     return isValid;
   }
 

@@ -8,6 +8,7 @@ import HomePage from './components/HomePage';
 import IngredientList from './components/Ingredients/IngredientListContainer';
 import RecipeCreate from './components/Recipes/RecipeCreate';
 import RecipeDetail from './components/Recipes/RecipeDetailContainer';
+import RecipeEdit from './components/Recipes/RecipeEdit';
 import RecipeList from './components/Recipes/RecipeListContainer';
 
 const styles = {
@@ -43,6 +44,7 @@ class App extends Component {
             <Switch>
               <Route exact path='/ingredients' component={ IngredientList } />
 
+              <Route exact path='/recipes/edit/:id' component={ RecipeEdit } />
               <Route exact path='/recipes/create' component={ RecipeCreate } />
               <Route exact path='/recipes' component={ RecipeList } />
               <Route exact path='/recipes/:id' component={ RecipeDetail } />

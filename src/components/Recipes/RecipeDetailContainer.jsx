@@ -22,7 +22,7 @@ class RecipeDetail extends Component{
     this.props.history.push('/recipes')
   }
 
-  deleteItem = () => {
+  deleteRecipe = () => {
     const id = this.props.match.params.id;
     this.props.deleteRecipe(id, this.deleteSuccess);
   }
@@ -51,6 +51,7 @@ class RecipeDetail extends Component{
     return (
       <RecipeDetailDisplay
         recipe={ this.props.recipe }
+        delete = { this.deleteRecipe }
         { ...this.props }
       />
     );

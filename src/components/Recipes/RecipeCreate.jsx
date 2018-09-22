@@ -7,11 +7,20 @@ import RecipeForm from './RecipeFormContainer';
 class RecipeCreate extends Component {
   createRecipe = (recipe) => {
     const { name, description, ingredients, instructions, style, batchSize } = recipe;
-    console.log({ name, description, ingredients, instructions, style, batchSize });
+    this.props.createRecipe({ name, description, ingredients, instructions, style, batchSize },
+      this.createSuccess, this.createFailure);
     this.props.history.push('/recipes');
   }
 
   cancel = () => {
+    this.props.history.push('/recipes');
+  }
+
+  createSuccess = (id) => {
+    this.props.history.push(`/recipes/${id}`);
+  }
+
+  createFailure = () => {
     this.props.history.push('/recipes');
   }
 

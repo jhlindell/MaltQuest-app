@@ -18,7 +18,8 @@ const styles = {
 
   card: {
     margin: 'auto',
-    maxWidth: '60%',
+    maxWidth: '80%',
+    minWidth: '60%',
     fontSize: '0.85rem'
   },
 
@@ -85,7 +86,7 @@ const RecipeDetailDisplay = (props) => {
                   <tbody>
                     { props.recipe ? 
                       props.recipe.ingredients.map((ingredient) => {
-                        return <tr key={ ingredient._id }>
+                        return <tr key={ ingredient.name + ingredient.type }>
                           <td>{ ingredient.amount }</td>
                           <td>{ ingredient.name }</td>
                           <td>{ ingredient.type }</td>
@@ -95,7 +96,7 @@ const RecipeDetailDisplay = (props) => {
                   </tbody>   
                 </Table>
               </Col>
-              <Col xs="6" style={styles.centering}>
+              <Col xs="6" style={ styles.centering }>
                 <p><strong>Instructions:</strong></p>
                 <ol>
                   { props.recipe.instructions.map((instruction) => {
@@ -113,16 +114,16 @@ const RecipeDetailDisplay = (props) => {
                 onClick={()=> props.history.push('/recipes')}>
                 Go Back
               </Button>
-              { props.authenticated &&<Button 
+              <Button 
                 color="warning"
                 type="button"
                 onClick={()=> props.history.push(`/recipes/edit/${ props.match.params.id}`)}>
                 Edit
-                </Button>}
+                </Button>
               <Button 
                 color="danger" 
                 type="button"
-                onClick={()=> props.deleteItem()}>
+                onClick={()=> props.delete()}>
                 Delete
               </Button>
             </div>

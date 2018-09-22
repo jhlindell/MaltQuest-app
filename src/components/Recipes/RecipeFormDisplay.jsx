@@ -150,6 +150,7 @@ const RecipeFormDisplay = (props) => {
                 <Input name="newIngredientName"
                   id="newIngredientName"
                   type="text" 
+                  placeholder="Ingredient Name"
                   onChange={(e) => props.handleInputChange(e)}
                   value={ props.state.newIngredientName } />
               </Col>
@@ -157,6 +158,7 @@ const RecipeFormDisplay = (props) => {
                 <Input name="newIngredientType"
                   type="text" 
                   id="newIngredientType"
+                  placeholder="Type"
                   onChange={(e) => props.handleInputChange(e)}
                   value={ props.state.newIngredientType } />
               </Col>
@@ -164,6 +166,7 @@ const RecipeFormDisplay = (props) => {
                 <Input name="newIngredientAmount"
                   type="text" 
                   id="newIngredientAmount"
+                  placeholder="Amount"
                   onChange={(e) => props.handleInputChange(e)}
                   value={ props.state.newIngredientAmount } />  
               </Col>

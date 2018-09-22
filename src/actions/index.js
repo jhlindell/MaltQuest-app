@@ -85,8 +85,17 @@ export function clearRecipeList(){
   return { type: 'CLEAR_RECIPE_LIST' };
 }
 
-export function createRecipe(){
-  console.log('this is where api call for creating recipe would go');
+export function createRecipe(recipe, success, failure){
+  return (dispatch) => {
+    axios.post(`${URL}/api/recipes/`, recipe)
+      .then((response) => {
+        success(response.data._id);
+      })
+      .catch((err)=> {
+        console.log(err);
+        failure();
+      });
+  }
 }
 
 export function getRecipeById(id, failure){
@@ -116,5 +125,17 @@ export function deleteRecipe(id, success){
       .catch((err)=> {
         console.log(err);
       });
+  }
+}
+
+export function editRecipe(id, recipe, success){
+  return (dispatch) => {
+    axios.put(`${URL}/api/recipes/${id}`, recipe)
+      .then((response)=> {
+        success();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 }
