@@ -14,6 +14,12 @@ class IngredientForm extends Component{
     }
   }
 
+  componentWillReceiveProps(nextProps){
+    if(nextProps.ingredient){
+      this.setState({ name: nextProps.ingredient.name, type: nextProps.ingredient.type });
+    }
+  }
+
   handleInputChange = (event) => {
     const target = event.target;
     const value = target.value;

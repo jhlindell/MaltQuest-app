@@ -6,6 +6,7 @@ import Navbar from './components/Nav/Navbar';
 
 import HomePage from './components/HomePage';
 import IngredientCreate from './components/Ingredients/IngredientCreate';
+import IngredientEdit from './components/Ingredients/IngredientEdit';
 import IngredientList from './components/Ingredients/IngredientListContainer';
 import RecipeCreate from './components/Recipes/RecipeCreate';
 import RecipeDetail from './components/Recipes/RecipeDetailContainer';
@@ -43,6 +44,7 @@ class App extends Component {
           </div>
           <div style={ styles.flex1 } id="mainBlock">
             <Switch>
+              <Route exact path='/ingredients/edit/:id' component={ IngredientEdit } />
               <Route exact path='/ingredients' component={ IngredientList } />
               <Route exact path='/ingredients/create' component={ IngredientCreate } />
 

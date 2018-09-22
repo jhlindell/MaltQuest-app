@@ -44,11 +44,23 @@ function newIngredient(state = null, action){
   }
 }
 
+function ingredient(state = null, action){
+  switch(action.type){
+    case 'SINGLE_INGREDIENT':
+      return action.payload;
+    case 'CLEAR_SINGLE_INGREDIENT':
+      return null;
+    default:
+      return state;
+  }
+}
+
 const appReducer = combineReducers({
   ingredientList,
   recipeList,
   recipe,
-  newIngredient
+  newIngredient,
+  ingredient
 });
 
 export default appReducer;

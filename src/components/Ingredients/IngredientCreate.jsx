@@ -8,7 +8,7 @@ import IngredientForm from './IngredientFormContainer';
 const cardStyle = {
   display: 'flex',
   margin: 'auto',
-  cardColumns: '1'
+  minWidth: '50%',
 };
 
 class IngredientCreate extends Component {

@@ -96,6 +96,26 @@ const IngredientListDisplay = (props) => {
                 return <tr key={ingredient._id}>
                 <td>{ingredient.name}</td>
                 <td>{ingredient.type}</td>
+                <td>
+                  <Button
+                    type="button"
+                    color="danger"
+                    size="sm"
+                    onClick= {()=> props.delete(ingredient._id)}
+                  >
+                    Delete
+                  </Button>
+                </td>
+                <td>
+                  <Button
+                    type="button"
+                    color="warning"
+                    size="sm"
+                    onClick= {()=> props.history.push(`/ingredients/edit/${ingredient._id}`)}
+                  >
+                    Edit
+                  </Button>
+                </td>
                 </tr>
               }) 
             }

@@ -156,3 +156,43 @@ export function createIngredient(ingredient, success){
 export function clearNewIngredient(){
   return { type: 'CLEAR_NEW_INGREDIENT' };
 }
+
+export function deleteIngredient(id, success){
+  return (dispatch) => {
+    axios.delete(`${URL}/api/ingredients/${id}`)
+      .then((response) => {
+        success();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+}
+
+export function getIngredientById(id){
+  return (dispatch) => {
+    axios.get(`${URL}/api/ingredients/${id}`)
+      .then((response) => {
+        dispatch({ type: 'SINGLE_INGREDIENT', payload: response.data });
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+}
+
+export function clearSingleIngredient(){
+  return { type: 'CLEAR_SINGLE_INGREDIENT' };
+}
+
+export function editIngredient(id, ingredient, success){
+  return (dispatch) => {
+  axios.put(`${URL}/api/ingredients/${id}`, ingredient)
+    .then((response) => {
+      success();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+}

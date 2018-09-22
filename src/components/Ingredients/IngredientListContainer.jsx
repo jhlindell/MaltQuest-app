@@ -2,7 +2,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import React, {Component} from 'react';
 import IngredientListDisplay from './IngredientListDisplay';
-import { getIngredientList, clearIngredientList } from '../../actions';
+import { getIngredientList, clearIngredientList, deleteIngredient } from '../../actions';
 
 class IngredientList extends Component {
   constructor(props) {
@@ -39,6 +39,14 @@ class IngredientList extends Component {
     this.props.getIngredientList(this.state.activePage, this.state.itemsPerPage, this.state.searchBox)
   }
 
+  deleteSuccess = () => {
+    this.props.getIngredientList(this.state.activePage, this.state.itemsPerPage, this.state.searchBox)
+  }
+
+  delete = (id) => {
+    this.props.deleteIngredient(id, this.deleteSuccess);
+  }
+
   render(){
     return (
       <IngredientListDisplay 
@@ -47,6 +55,7 @@ class IngredientList extends Component {
         handlePageChange = { this.handlePageChange }
         handleInputChange= { this.handleInputChange }
         handleSearchSubmit= { this.handleSearchSubmit }
+        delete= { this.delete }
         { ...this.props }
       />
     );
@@ -58,7 +67,7 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ getIngredientList, clearIngredientList }, dispatch);
+  return bindActionCreators({ getIngredientList, clearIngredientList, deleteIngredient }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(IngredientList);
