@@ -194,7 +194,6 @@ class RecipeFormDisplay extends Component {
                 <Col sm={2}>
                   <Button
                     style={ styles.button }
-                    type="button"
                     onClick={()=> this.props.addIngredient()}>
                     Add
                   </Button>
@@ -246,7 +245,6 @@ class RecipeFormDisplay extends Component {
                 </Col>
                 <Button sm={3}
                   style={ styles.button }
-                  type="button"
                   onClick={ ()=> this.props.addInstruction() }>
                   Add Instruction
                 </Button>
@@ -260,7 +258,7 @@ class RecipeFormDisplay extends Component {
               <Button style={ styles.button } type="submit">
                 Submit
               </Button>
-              <Button color="secondary" type="button" onClick={()=> this.props.cancel()}>
+              <Button color="secondary" onClick={()=> this.props.cancel()}>
                 Cancel
               </Button>
             </div>

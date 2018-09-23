@@ -15,3 +15,17 @@
   z-index: 2;
   color: white;
 }
+
+a {
+  color: #dd8b15;
+}
+
+a:hover {
+  color: #81520f;
+  text-decoration: underline;
+}
+
+.jumbotron {
+  padding: 2rem;
+  margin: auto;
+}

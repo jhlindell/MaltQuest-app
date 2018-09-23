@@ -43,7 +43,7 @@ const IngredientListDisplay = (props) => {
     <Card style={styles.list}>
       <CardHeader style={styles.header}>
         <div style={styles.headerRow}>
-          <h4>Ingredient List</h4>
+          <h4>Ingredients</h4>
         </div>
         <div style={styles.headerRow}>
           <div style={{paddingTop: '15px'}}>
@@ -68,7 +68,6 @@ const IngredientListDisplay = (props) => {
             <InputGroupAddon addonType="append">
               <Button 
                 style={ styles.button }
-                type="button"
                 onClick={ props.handleSearchSubmit }
               >Search</Button>
             </InputGroupAddon>
@@ -76,7 +75,6 @@ const IngredientListDisplay = (props) => {
           <Button
             className="ml-2"
             style={ styles.button}
-            type="button"
             onClick={ ()=> props.history.push('/ingredients/create')}
           >
             New Ingredient
@@ -95,25 +93,23 @@ const IngredientListDisplay = (props) => {
             { props.ingredientList.docs.map((ingredient) => {
                 return <tr key={ingredient._id}>
                 <td>{ingredient.name}</td>
-                <td>{ingredient.type}</td>
+                <td>{ingredient.type}</td>               
                 <td>
                   <Button
-                    type="button"
-                    color="danger"
-                    size="sm"
-                    onClick= {()=> props.delete(ingredient._id)}
-                  >
-                    Delete
-                  </Button>
-                </td>
-                <td>
-                  <Button
-                    type="button"
                     color="warning"
                     size="sm"
                     onClick= {()=> props.history.push(`/ingredients/edit/${ingredient._id}`)}
                   >
                     Edit
+                  </Button>
+                </td>
+                <td>
+                  <Button
+                    color="danger"
+                    size="sm"
+                    onClick= {()=> props.delete(ingredient._id)}
+                  >
+                    Delete
                   </Button>
                 </td>
                 </tr>

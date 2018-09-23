@@ -4,7 +4,7 @@ import {
   Card, CardBody, CardFooter, CardHeader, 
   Col, Row, Table 
 } from 'reactstrap';
-import Beermug from '../../beermug.jpg';
+import Beermug from '../../images/beermug.jpg';
 
 const styles = {
   outerDiv: {
@@ -110,19 +110,16 @@ const RecipeDetailDisplay = (props) => {
             <div className="btn-group" style={ styles.button }>
               <Button
                 style={ styles.backButton }
-                type="button"
                 onClick={()=> props.history.push('/recipes')}>
                 Go Back
               </Button>
               <Button 
                 color="warning"
-                type="button"
                 onClick={()=> props.history.push(`/recipes/edit/${ props.match.params.id}`)}>
                 Edit
                 </Button>
               <Button 
                 color="danger" 
-                type="button"
                 onClick={()=> props.delete()}>
                 Delete
               </Button>

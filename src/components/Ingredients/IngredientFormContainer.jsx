@@ -15,7 +15,9 @@ class IngredientForm extends Component{
   }
 
   componentDidMount(){
-    this.setState({ name: this.props.ingredient.name, type: this.props.ingredient.type });
+    if(this.props.ingredient){
+      this.setState({ name: this.props.ingredient.name, type: this.props.ingredient.type });
+    }
   }
 
   componentWillReceiveProps(nextProps){

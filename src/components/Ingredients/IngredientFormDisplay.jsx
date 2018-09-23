@@ -55,7 +55,7 @@ const IngredientFormDisplay = (props) => {
             >
               Submit
             </Button>
-            <Button color="secondary" type="button" onClick={()=> props.cancel()}>
+            <Button color="secondary" onClick={()=> props.cancel()}>
               Cancel
             </Button>
           </div>

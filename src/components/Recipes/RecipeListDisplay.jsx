@@ -41,7 +41,7 @@ const RecipeListDisplay = (props) => {
     <Card style={styles.list}>
       <CardHeader style={styles.header}>
         <div style={styles.headerRow}>
-          <h4>Recipe List</h4>
+          <h4>Recipes</h4>
         </div>
         <div style={styles.headerRow}>
           <div style={{paddingTop: '15px'}}>
@@ -66,7 +66,6 @@ const RecipeListDisplay = (props) => {
             <InputGroupAddon addonType="append">
               <Button 
                 style={ styles.button }
-                type="button"
                 onClick={ props.handleSearchSubmit }
               >Search</Button>
             </InputGroupAddon>
@@ -100,11 +99,6 @@ const RecipeListDisplay = (props) => {
         </Table> : <span>Loading...</span>}
       <CardFooter style={ styles.header }>
         <div style={styles.headerRow}> 
-          <Button 
-            style={ styles.button }
-            onClick={()=> props.history.push('/recipes/create')}>
-            Add Recipe
-          </Button>
           <div style={{paddingTop: '15px'}}>
             <Pagination              
               activePage={ props.state.activePage }
@@ -117,6 +111,11 @@ const RecipeListDisplay = (props) => {
               activeLinkClass='active-link'
             />
           </div>
+          <Button 
+            style={ styles.button }
+            onClick={()=> props.history.push('/recipes/create')}>
+            Add Recipe
+          </Button>
         </div>
       </CardFooter>
     </Card>
