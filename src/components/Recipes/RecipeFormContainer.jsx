@@ -48,6 +48,12 @@ class RecipeFormContainer extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps){
+    if(nextProps.newIngredient !== null){
+      this.setState({ selected: [nextProps.newIngredient], newIngredient: null });
+    }
+  }
+
   handleInputChange = (event) => {
     const target = event.target;
     const value = target.value;
@@ -114,8 +120,10 @@ class RecipeFormContainer extends Component {
     const ingredientValid = this.validateIngredient();
     if(ingredientValid){
       if(!this.state.selected){
+        console.log('new ingredient')
         this.addIngToDB();
       } else {
+        console.log('not new ingredient')
         const ingArray = this.state.ingredients;
           const newIngredient = { 
           type: this.state.newIngredientType, 
@@ -131,7 +139,7 @@ class RecipeFormContainer extends Component {
           newIngredientAmount: '', 
           newIngredientName: '',
           newIngredientType: ''
-        }); 
+        });
         this.child.clearTypeahead();
       }
     }
