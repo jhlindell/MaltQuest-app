@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import RecipeFormDisplay from './RecipeFormDisplay';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { createIngredient } from '../../actions';
+import { createIngredient, clearNewIngredient } from '../../actions';
 
 class RecipeFormContainer extends Component {
   constructor(props){
@@ -50,7 +50,8 @@ class RecipeFormContainer extends Component {
 
   componentWillReceiveProps(nextProps){
     if(nextProps.newIngredient !== null){
-      this.setState({ selected: [nextProps.newIngredient], newIngredient: null });
+      this.setState({ selected: [nextProps.newIngredient] });
+      this.props.clearNewIngredient();
     }
   }
 
@@ -265,7 +266,7 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ createIngredient }, dispatch);
+  return bindActionCreators({ createIngredient, clearNewIngredient }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecipeFormContainer);
