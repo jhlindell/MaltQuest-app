@@ -44,7 +44,7 @@ class RecipeFormContainer extends Component {
         batchSize: this.props.recipe.batchSize,
         ingredients: this.props.recipe.ingredients,
         instructions: this.props.recipe.instructions
-      })
+      });
     }
   }
 
@@ -121,10 +121,8 @@ class RecipeFormContainer extends Component {
     const ingredientValid = this.validateIngredient();
     if(ingredientValid){
       if(!this.state.selected){
-        console.log('new ingredient')
         this.addIngToDB();
       } else {
-        console.log('not new ingredient')
         const ingArray = this.state.ingredients;
           const newIngredient = { 
           type: this.state.newIngredientType, 
